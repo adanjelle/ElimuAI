@@ -2,33 +2,11 @@ import React, { useState } from 'react';
 import Header from './Component/Header/Header';
 import Sidebar from './Component/Sidebar/Sidebar';
 import Chat from './Component/Chat/Chat';
-// import Login from './Component/Auth/Login/login';
 import './App.css';
 
 const App = () => {
-  // const [currentPage, setCurrentPage] = useState('login');
-  // const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [user, setUser] = useState(null);
   const [messages, setMessages] = useState([]);
   const [loading, setLoading] = useState(false);
-
-  const handleLoginSuccess = (userData) => {
-    setIsLoggedIn(true);
-    setUser(userData);
-    setCurrentPage('chat');
-    setMessages([]); // Clear messages on login
-  };
-
-  // const handleLogout = () => {
-  //   setIsLoggedIn(false);
-  //   setUser(null);
-  //   setCurrentPage('login');
-  //   setMessages([]);
-  //   localStorage.removeItem('elimuai-chat-messages');
-  // };
-
-  // const handleNavigateToLogin = () => setCurrentPage('login');
-  // const handleNavigateToSignup = () => setCurrentPage('login');
 
   // Handle sending messages from Chat component
   const handleSendMessage = async (inputText) => {
@@ -144,41 +122,25 @@ const App = () => {
     }
   };
 
-  // if (currentPage === 'login') {
-  //   return (
-  //     <Login 
-  //       onLoginSuccess={handleLoginSuccess}
-  //       onNavigateToSignup={handleNavigateToSignup}
-  //     />
-  //   );
-  // }
-
   return (
-//     <div className="app">
-//       <Header 
-//         onClearChat={clearChat}
-//         onLogout={handleLogout} 
-//         isLoggedIn={isLoggedIn}
-//         user={user}
-//       />
-//       <div className="main-layout">
-//         <Sidebar 
-//   isLoggedIn={isLoggedIn}
-//   user={user}
-//   messages={messages}
-//   onNewChat={clearChat}
-// />
+    <div className="app">
+      <Header 
+        onClearChat={clearChat}
+      />
+      <div className="main-layout">
+        <Sidebar 
+          messages={messages}
+          onNewChat={clearChat}
+        />
         <main className="main-content">
           <Chat 
             messages={messages}
             loading={loading}
             onSendMessage={handleSendMessage}
-            isLoggedIn={isLoggedIn}
-            onNavigateToLogin={handleNavigateToLogin}
-            user={user}
           />
         </main>
-    
+      </div>
+    </div>
   );
 };
 
